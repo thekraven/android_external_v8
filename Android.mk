@@ -17,17 +17,6 @@
 
 BASE_PATH := $(call my-dir)
 include $(CLEAR_VARS)
-
-# Two ways to control which JS engine is used:
-# 1. use JS_ENGINE environment variable, value can be either 'jsc' or 'v8'
-#    This is the preferred way.
-# 2. if JS_ENGINE is not set, or is not 'jsc' or 'v8', this makefile picks
-#    up a default engine to build.
-#    To help setup buildbot, a new environment variable, USE_ALT_JS_ENGINE,
-#    can be set to true, so that two builds can be different but without
-#    specifying which JS engine to use.
-
-ifneq ($(DYNAMIC_SHARED_LIBV8SO),true)
 # Build libv8 and v8shell
 ifeq ($(TARGET_ARCH),arm)
     ifeq ($(ARCH_ARM_HAVE_ARMV7A),true)
@@ -38,5 +27,4 @@ ifeq ($(TARGET_ARCH),arm)
     endif
     include $(BASE_PATH)/Android.libv8.mk
     include $(BASE_PATH)/Android.v8shell.mk
-endif
 endif
